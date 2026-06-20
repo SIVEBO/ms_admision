@@ -4,22 +4,22 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: jdbc:mariadb://localhost:3306/db_ms_admision?createDatabaseIfNotExist=true
-    username: root
-    password:
+    url: ${DB_URL:jdbc:mariadb://localhost:3306/db_ms_admision?createDatabaseIfNotExist=true}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
     driver-class-name: org.mariadb.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MariaDBDialect
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: ${JPA_DDL_AUTO:update}
+    show-sql: ${JPA_SHOW_SQL:true}
     properties:
       hibernate:
         format:
           sql: true
 
 server:
-  port: 8087
+  port: ${SERVER_PORT:8087}
 
 springdoc:
   api-docs:
@@ -31,17 +31,16 @@ springdoc:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka/}
   instance:
     prefer-ip-address: true
 
-# URLs de los microservicios externos consultados via WebClient
 ms:
   clientes:
-    url: http://localhost:8085
+    url: ${MS_CLIENTES_URL:http://localhost:8085}
   sucursales:
-    url: http://localhost:8083
+    url: ${MS_SUCURSALES_URL:http://localhost:8083}
   auth:
-    url: http://localhost:8086
+    url: ${MS_AUTH_URL:http://localhost:8086}
   tracking:
-    url: http://localhost:8093
+    url: ${MS_TRACKING_URL:http://localhost:8093}

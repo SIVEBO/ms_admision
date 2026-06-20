@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb_admision;DB_CLOSE_DELAY=-1;MODE=MariaDB
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.H2Dialect
+
+eureka:
+  client:
+    enabled: false
+
+ms:
+  clientes:
+    url: http://localhost:8085
+  sucursales:
+    url: http://localhost:8083
+  auth:
+    url: http://localhost:8086
+  tracking:
+    url: http://localhost:8093
