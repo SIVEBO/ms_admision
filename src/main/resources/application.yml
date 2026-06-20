@@ -4,7 +4,7 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: ${DB_URL:jdbc:mariadb://localhost:3306/db_ms_admision?createDatabaseIfNotExist=true}
+    url: ${DB_URL:jdbc:mariadb://localhost:3306/db_ms_admision?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true}
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:}
     driver-class-name: org.mariadb.jdbc.Driver
@@ -19,7 +19,7 @@ spring:
           sql: true
 
 server:
-  port: ${SERVER_PORT:8003}
+  port: ${SERVER_PORT:8083}
 
 springdoc:
   api-docs:
@@ -37,10 +37,10 @@ eureka:
 
 ms:
   clientes:
-    url: ${MS_CLIENTES_URL:http://localhost:8009}
+    url: ${MS_CLIENTES_URL:http://localhost:8089}
   sucursales:
-    url: ${MS_SUCURSALES_URL:http://localhost:8083}
+    url: ${MS_SUCURSALES_URL:http://localhost:8082}
   auth:
-    url: ${MS_AUTH_URL:http://localhost:8001}
+    url: ${MS_AUTH_URL:http://localhost:8081}
   tracking:
-    url: ${MS_TRACKING_URL:http://localhost:8093}
+    url: ${MS_TRACKING_URL:http://localhost:8084}
