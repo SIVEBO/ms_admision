@@ -19,7 +19,7 @@ spring:
           sql: true
 
 server:
-  port: ${SERVER_PORT:8087}
+  port: ${SERVER_PORT:8003}
 
 springdoc:
   api-docs:
@@ -37,10 +37,10 @@ eureka:
 
 ms:
   clientes:
-    url: ${MS_CLIENTES_URL:http://localhost:8085}
+    url: ${MS_CLIENTES_URL:http://localhost:8009}
   sucursales:
     url: ${MS_SUCURSALES_URL:http://localhost:8083}
   auth:
-    url: ${MS_AUTH_URL:http://localhost:8086}
+    url: ${MS_AUTH_URL:http://localhost:8001}
   tracking:
     url: ${MS_TRACKING_URL:http://localhost:8093}

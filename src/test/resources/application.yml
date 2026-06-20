@@ -15,10 +15,10 @@ eureka:
 
 ms:
   clientes:
-    url: http://localhost:8085
+    url: http://localhost:8009
   sucursales:
     url: http://localhost:8083
   auth:
-    url: http://localhost:8086
+    url: http://localhost:8001
   tracking:
     url: http://localhost:8093
