@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ms_admision
+    name: ms-admision
   profiles:
     active: dev
   datasource:
