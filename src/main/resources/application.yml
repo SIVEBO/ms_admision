@@ -26,7 +26,7 @@ springdoc:
     enabled: true
   swagger-ui:
     enabled: true
-    path: /doc/swagger-ui.html
+    path: /swagger-ui.html
 
 eureka:
   client:
@@ -34,13 +34,3 @@ eureka:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka/}
   instance:
     prefer-ip-address: true
-
-ms:
-  clientes:
-    url: ${MS_CLIENTES_URL:http://localhost:8089}
-  sucursales:
-    url: ${MS_SUCURSALES_URL:http://localhost:8082}
-  auth:
-    url: ${MS_AUTH_URL:http://localhost:8081}
-  tracking:
-    url: ${MS_TRACKING_URL:http://localhost:8084}
