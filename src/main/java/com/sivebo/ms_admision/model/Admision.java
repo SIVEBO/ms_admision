@@ -25,19 +25,15 @@ public class Admision {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         Long id;
 
-        // Ref Ext -> db_ms_clientes.CLIENTE
         @Column(name = "id_cliente_rem", nullable = false)
         Long idClienteRem;
 
-        // Ref Ext -> db_ms_clientes.CLIENTE
         @Column(name = "id_cliente_dest", nullable = false)
         Long idClienteDest;
 
-        // Ref Ext -> db_ms_sucursales.SUCURSAL
         @Column(name = "id_sucursal_origen", nullable = false)
         Long idSucursalOrigen;
 
-        // Ref Ext -> db_ms_sucursales.SUCURSAL
         @Column(name = "id_sucursal_dest", nullable = false)
         Long idSucursalDest;
 
@@ -51,7 +47,6 @@ public class Admision {
         @Column(name = "fecha_creacion", nullable = false)
         LocalDateTime fechaCreacion;
 
-        // Ref Ext -> db_ms_auth.USUARIO
         @Column(name = "id_usuario_reg", nullable = false)
         Long idUsuarioReg;
 }

@@ -1,0 +1,75 @@
+{
+  "info": {
+    "name": "ms_admision",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "SIVEBO ms_admision — todos los endpoints enrutados a través del API Gateway ({{baseUrl}}). Requiere que ms_auth, ms_clientes y ms_sucursales estén activos para validar ids. Al crear una admisión se encadena {{idAdmision}} para las consultas siguientes."
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "idSucursal", "value": "1" },
+    { "key": "idCliente", "value": "1" },
+    { "key": "idUsuario", "value": "1" },
+    { "key": "idAdmision", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "Admisiones",
+      "item": [
+        {
+          "name": "Crear admisión",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idClienteRem\": 1,\n  \"idClienteDest\": 1,\n  \"idSucursalOrigen\": 1,\n  \"idSucursalDest\": 2,\n  \"nombreTipoCarga\": \"Encomienda\",\n  \"pesoKg\": 12.5,\n  \"idUsuarioReg\": 1\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/admisiones", "host": ["{{baseUrl}}"], "path": ["api","v1","admisiones"] }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var j;",
+                  "try { j = pm.response.json(); } catch (e) { j = null; }",
+                  "if (j && j.id !== undefined && j.id !== null) pm.collectionVariables.set(\"idAdmision\", j.id);",
+                  "pm.test(\"status ok\", function () { pm.expect(pm.response.code).to.be.oneOf([200,201]); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Obtener admisión por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/admisiones/{{idAdmision}}", "host": ["{{baseUrl}}"], "path": ["api","v1","admisiones","{{idAdmision}}"] }
+          },
+          "event": [
+            { "listen": "test", "script": { "type": "text/javascript", "exec": [ "pm.test(\"status ok\", function () { pm.expect(pm.response.code).to.be.oneOf([200]); });" ] } }
+          ]
+        },
+        {
+          "name": "Listar admisiones por sucursal",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admisiones?idSucursal={{idSucursal}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api","v1","admisiones"],
+              "query": [ { "key": "idSucursal", "value": "{{idSucursal}}" } ]
+            }
+          },
+          "event": [
+            { "listen": "test", "script": { "type": "text/javascript", "exec": [ "pm.test(\"status ok\", function () { pm.expect(pm.response.code).to.be.oneOf([200]); });" ] } }
+          ]
+        }
+      ]
+    }
+  ]
+}

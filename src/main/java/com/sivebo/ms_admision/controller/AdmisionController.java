@@ -33,7 +33,7 @@ public class AdmisionController {
 
         private final AdmisionService admisionService;
 
-        @Operation(summary = "Registrar una admision", description = "RF-14: registra remitente, destinatario, tipo de carga y peso")
+        @Operation(summary = "Registrar una admision", description = "registra remitente, destinatario, tipo de carga y peso")
         @PostMapping
         public ResponseEntity<AdmisionResponseDTO> registrar(@Valid @RequestBody AdmisionRequestDTO dto) {
                 log.info(">>> POST /api/v1/admisiones - remitente={}, destinatario={}",
@@ -47,7 +47,7 @@ public class AdmisionController {
                 return ResponseEntity.ok(admisionService.getById(id));
         }
 
-        @Operation(summary = "Consultar admisiones por sucursal con filtros", description = "RF-17: filtra por sucursal de origen, rango de fecha y tipo de carga. Ej: ?idSucursal=1&nombreTipo=Encomienda&desde=2026-01-01T00:00:00")
+        @Operation(summary = "Consultar admisiones por sucursal con filtros", description = "filtra por sucursal de origen, rango de fecha y tipo de carga. Ej: ?idSucursal=1&nombreTipo=Encomienda&desde=2026-01-01T00:00:00")
         @GetMapping
         public List<AdmisionResponseDTO> buscar(
                         @RequestParam Long idSucursal,

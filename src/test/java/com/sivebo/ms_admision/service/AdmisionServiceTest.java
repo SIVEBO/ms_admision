@@ -48,7 +48,7 @@ class AdmisionServiceTest {
     }
 
     @Test
-    void getById_found_returnsDTO() {
+    void getByIdFoundReturnsDTO() {
         when(admisionRepository.findById(1L)).thenReturn(Optional.of(ADMISION));
 
         AdmisionResponseDTO result = service.getById(1L);
@@ -59,14 +59,14 @@ class AdmisionServiceTest {
     }
 
     @Test
-    void getById_notFound_throwsEntityNotFoundException() {
+    void getByIdNotFoundThrowsEntityNotFoundException() {
         when(admisionRepository.findById(99L)).thenReturn(Optional.empty());
 
         assertThrows(EntityNotFoundException.class, () -> service.getById(99L));
     }
 
     @Test
-    void buscarConFiltros_sinFiltros_retornaTodosDeUcursal() {
+    void buscarConFiltrosSinFiltrosRetornaTodosDeUcursal() {
         when(admisionRepository.buscarConFiltros(1L, null, null, null)).thenReturn(List.of(ADMISION));
 
         List<AdmisionResponseDTO> result = service.buscarConFiltros(1L, null, null, null);
@@ -76,7 +76,7 @@ class AdmisionServiceTest {
     }
 
     @Test
-    void buscarConFiltros_conTipo_filtraCorrectamente() {
+    void buscarConFiltrosConTipoFiltraCorrectamente() {
         when(admisionRepository.buscarConFiltros(1L, "Encomienda", null, null))
                 .thenReturn(List.of(ADMISION));
 
@@ -87,14 +87,14 @@ class AdmisionServiceTest {
     }
 
     @Test
-    void buscarConFiltros_sinResultados_retornaListaVacia() {
+    void buscarConFiltrosSinResultadosRetornaListaVacia() {
         when(admisionRepository.buscarConFiltros(99L, null, null, null)).thenReturn(List.of());
 
         assertTrue(service.buscarConFiltros(99L, null, null, null).isEmpty());
     }
 
     @Test
-    void registrar_requestValido_guardaYRetornaDTO() {
+    void registrarRequestValidoGuardaYRetornaDTO() {
         AdmisionRequestDTO dto = buildDTO();
         doNothing().when(webClientUtil).validateExists(anyLong(), anyString(), anyString(), any());
         doNothing().when(webClientUtil).validateExistsByQueryParam(anyLong(), anyString(), anyString(), anyString(), any());
@@ -110,7 +110,7 @@ class AdmisionServiceTest {
     }
 
     @Test
-    void registrar_tipoCargaNoExiste_lanzaEntityNotFoundException() {
+    void registrarTipoCargaNoExisteLanzaEntityNotFoundException() {
         AdmisionRequestDTO dto = buildDTO();
         doNothing().when(webClientUtil).validateExists(anyLong(), anyString(), anyString(), any());
         doNothing().when(webClientUtil).validateExistsByQueryParam(anyLong(), anyString(), anyString(), anyString(), any());

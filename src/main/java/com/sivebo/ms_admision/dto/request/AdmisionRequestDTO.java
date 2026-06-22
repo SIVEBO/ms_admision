@@ -17,11 +17,9 @@ public class AdmisionRequestDTO {
         @NotNull(message = "El id del cliente destinatario es obligatorio")
         Long idClienteDest;
 
-        // RF-15: sucursal de origen obligatoria
         @NotNull(message = "La sucursal de origen es obligatoria")
         Long idSucursalOrigen;
 
-        // RF-15: sucursal de destino obligatoria
         @NotNull(message = "La sucursal de destino es obligatoria")
         Long idSucursalDest;
 

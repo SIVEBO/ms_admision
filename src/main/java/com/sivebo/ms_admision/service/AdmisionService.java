@@ -34,22 +34,18 @@ public class AdmisionService extends MapToDTO {
         private final WebClient authWebClient;
         private final WebClient trackingWebClient;
 
-        // RF-14: registrar admision con remitente y destinatario
         public AdmisionResponseDTO registrar(AdmisionRequestDTO dto) {
 
-                // SCRUM-62: validar remitente y destinatario contra ms_clientes
                 webClientUtil.validateExists(dto.getIdClienteRem(), "Cliente remitente", "/api/v1/clientes/{id}",
                                 clientesWebClient);
                 webClientUtil.validateExists(dto.getIdClienteDest(), "Cliente destinatario", "/api/v1/clientes/{id}",
                                 clientesWebClient);
 
-                // SCRUM-63: validar sucursal origen y destino contra ms_sucursales
                 webClientUtil.validateExistsByQueryParam(dto.getIdSucursalOrigen(), "Sucursal de origen",
                                 "/api/v1/sucursales/buscar", "id", sucursalesWebClient);
                 webClientUtil.validateExistsByQueryParam(dto.getIdSucursalDest(), "Sucursal de destino",
                                 "/api/v1/sucursales/buscar", "id", sucursalesWebClient);
 
-                // SCRUM-64: validar usuario que registra la admision contra ms_auth
                 webClientUtil.validateExists(dto.getIdUsuarioReg(), "Usuario registrador", "/api/v1/usuarios/{id}",
                                 authWebClient);
 
@@ -72,8 +68,6 @@ public class AdmisionService extends MapToDTO {
                 log.info(">>> Admisión registrada id={}, remitente={}, destinatario={}",
                                 guardada.getId(), dto.getIdClienteRem(), dto.getIdClienteDest());
 
-                // SCRUM-65 (RF-16): disparar creacion de guia en ms_tracking
-                // codigoTracking: exactamente 12 chars alfanumerico en mayusculas (requerido por ms_tracking)
                 String codigoTracking = java.util.UUID.randomUUID()
                                 .toString().replace("-", "").substring(0, 12).toUpperCase();
 
@@ -92,7 +86,6 @@ public class AdmisionService extends MapToDTO {
                                 .orElseThrow(() -> new EntityNotFoundException("Admisión no encontrada con id: " + id));
         }
 
-        // RF-17: consultar admisiones por sucursal, fecha y tipo de carga
         public List<AdmisionResponseDTO> buscarConFiltros(Long idSucursal, String nombreTipo,
                         LocalDateTime desde, LocalDateTime hasta) {
                 log.info(">>> Consultando admisiones sucursal={}, tipo={}, desde={}, hasta={}",
