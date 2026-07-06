@@ -47,6 +47,12 @@ public class AdmisionController {
                 return ResponseEntity.ok(admisionService.getById(id));
         }
 
+        @Operation(summary = "Buscar admision por codigo de admision", description = "Usado para validacion entre microservicios via WebClient")
+        @GetMapping("/buscar")
+        public ResponseEntity<AdmisionResponseDTO> buscarPorCodigo(@RequestParam String codigoAdmision) {
+                return ResponseEntity.ok(admisionService.getByCodigoAdmision(codigoAdmision));
+        }
+
         @Operation(summary = "Consultar admisiones por sucursal con filtros", description = "filtra por sucursal de origen, rango de fecha y tipo de carga. Ej: ?idSucursal=1&nombreTipo=Encomienda&desde=2026-01-01T00:00:00")
         @GetMapping
         public List<AdmisionResponseDTO> buscar(

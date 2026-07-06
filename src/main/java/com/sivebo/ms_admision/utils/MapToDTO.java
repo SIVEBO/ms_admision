@@ -8,6 +8,7 @@ public class MapToDTO {
         protected AdmisionResponseDTO mapAdmisionToDTO(Admision admision) {
                 return new AdmisionResponseDTO(
                                 admision.getId(),
+                                admision.getCodigoAdmision(),
                                 admision.getIdClienteRem(),
                                 admision.getIdClienteDest(),
                                 admision.getIdSucursalOrigen(),

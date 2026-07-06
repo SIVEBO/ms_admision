@@ -53,8 +53,12 @@ public class AdmisionService extends MapToDTO {
                                 .orElseThrow(() -> new EntityNotFoundException(
                                                 "Tipo de carga no encontrado: " + dto.getNombreTipoCarga()));
 
+                String codigoAdmision = java.util.UUID.randomUUID()
+                                .toString().replace("-", "").substring(0, 12).toUpperCase();
+
                 Admision admision = new Admision(
                                 null,
+                                codigoAdmision,
                                 dto.getIdClienteRem(),
                                 dto.getIdClienteDest(),
                                 dto.getIdSucursalOrigen(),
@@ -65,14 +69,14 @@ public class AdmisionService extends MapToDTO {
                                 dto.getIdUsuarioReg());
 
                 Admision guardada = admisionRepository.save(admision);
-                log.info(">>> Admisión registrada id={}, remitente={}, destinatario={}",
-                                guardada.getId(), dto.getIdClienteRem(), dto.getIdClienteDest());
+                log.info(">>> Admisión registrada id={}, codigoAdmision={}, remitente={}, destinatario={}",
+                                guardada.getId(), codigoAdmision, dto.getIdClienteRem(), dto.getIdClienteDest());
 
                 String codigoTracking = java.util.UUID.randomUUID()
                                 .toString().replace("-", "").substring(0, 12).toUpperCase();
 
                 webClientUtil.postCrear("/api/v1/guias",
-                                new CrearGuiaRequestDTO(codigoTracking, guardada.getId()),
+                                new CrearGuiaRequestDTO(codigoTracking, guardada.getCodigoAdmision()),
                                 "Guía de despacho", trackingWebClient);
 
                 log.info(">>> Guía disparada en ms_tracking, codigoTracking={}", codigoTracking);
@@ -84,6 +88,13 @@ public class AdmisionService extends MapToDTO {
                 return admisionRepository.findById(id)
                                 .map(this::mapAdmisionToDTO)
                                 .orElseThrow(() -> new EntityNotFoundException("Admisión no encontrada con id: " + id));
+        }
+
+        public AdmisionResponseDTO getByCodigoAdmision(String codigoAdmision) {
+                return admisionRepository.findByCodigoAdmision(codigoAdmision)
+                                .map(this::mapAdmisionToDTO)
+                                .orElseThrow(() -> new EntityNotFoundException(
+                                                "Admisión no encontrada con codigoAdmision: " + codigoAdmision));
         }
 
         public List<AdmisionResponseDTO> buscarConFiltros(Long idSucursal, String nombreTipo,

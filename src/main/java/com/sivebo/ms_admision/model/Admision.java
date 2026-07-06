@@ -25,6 +25,9 @@ public class Admision {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         Long id;
 
+        @Column(name = "codigo_admision", nullable = false, unique = true, length = 12)
+        String codigoAdmision;
+
         @Column(name = "id_cliente_rem", nullable = false)
         Long idClienteRem;
 

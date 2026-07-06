@@ -2,6 +2,7 @@ package com.sivebo.ms_admision.repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,6 +11,8 @@ import org.springframework.data.repository.query.Param;
 import com.sivebo.ms_admision.model.Admision;
 
 public interface AdmisionRepository extends JpaRepository<Admision, Long> {
+
+	Optional<Admision> findByCodigoAdmision(String codigoAdmision);
 
 	@Query("""
 			SELECT a FROM Admision a

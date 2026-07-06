@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class AdmisionResponseDTO {
 
         Long id;
+        String codigoAdmision;
         Long idClienteRem;
         Long idClienteDest;
         Long idSucursalOrigen;

@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class CrearGuiaRequestDTO {
 
         String codigoTracking;
-        Long idAdmision;
+        String codigoAdmision;
 }

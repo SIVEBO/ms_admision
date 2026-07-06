@@ -40,7 +40,7 @@ class AdmisionServiceTest {
     private static final TipoCarga TIPO = new TipoCarga(1L, "Encomienda", "Paquetes pequeños");
 
     private static final Admision ADMISION = new Admision(
-            1L, 10L, 20L, 1L, 2L, TIPO, 5.0,
+            1L, "ADM000000001A", 10L, 20L, 1L, 2L, TIPO, 5.0,
             LocalDateTime.of(2026, 1, 1, 10, 0), 100L);
 
     private AdmisionRequestDTO buildDTO() {
